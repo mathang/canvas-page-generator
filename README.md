@@ -1,6 +1,6 @@
 # Canvas Page Generator
 
-A lightweight Canvas LMS page generator built by Associate Professor Ross Clark with React, Vite, Tailwind CSS, and Handlebars templates. Fill out the form, generate HTML, and paste it directly into Canvas.
+A lightweight Canvas LMS page generator built by Associate Professor Ross Clark with React, Vite, Tailwind CSS, and Handlebars templates. Fill out the form, generate HTML, and paste it directly into Canvas. Verify before putting into Canvas please.
 
 ## Getting started
 
