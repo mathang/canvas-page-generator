@@ -1,0 +1,15 @@
+<h2>🎓 Introduction to {{module_title}}</h2>
+<p>Welcome to Week {{week_number}}. {{intro_text}}</p>
+
+<h2>📽️ Part 1: {{part1_title}}</h2>
+<iframe src="{{part1_video}}" width="720" height="405" loading="lazy"></iframe>
+<details><summary>Show Transcript</summary>
+  <div>{{part1_transcript}}</div>
+</details>
+
+<h2>📊 Summary Notes</h2>
+<ul>
+  {{#each summary_notes}}
+    <li>{{this}}</li>
+  {{/each}}
+</ul>
