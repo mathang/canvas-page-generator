@@ -1,6 +1,42 @@
 import { useState } from "react";
 import { generateHTML } from "../utils/generateHTML";
 
+const stripPrefix = (value, prefixes) => {
+  if (!value) {
+    return "";
+  }
+
+  const trimmed = value.trim();
+  const lowercaseValue = trimmed.toLowerCase();
+
+  for (const prefix of prefixes) {
+    if (lowercaseValue.startsWith(prefix.toLowerCase())) {
+      return trimmed.slice(prefix.length).trimStart();
+    }
+  }
+
+  return trimmed;
+};
+
+const prepareTemplateData = (formData) => ({
+  ...formData,
+  module_title: stripPrefix(formData.module_title, [
+    "🎓 Introduction to ",
+    "Introduction to ",
+  ]),
+  part1_title: stripPrefix(formData.part1_title, [
+    "📽️ Part 1: ",
+    "Part 1: ",
+  ]),
+  week_number: formData.week_number.trim(),
+  intro_text: formData.intro_text.trim(),
+  part1_video: formData.part1_video.trim(),
+  part1_transcript: formData.part1_transcript.trim(),
+  summary_notes: formData.summary_notes
+    .map((note) => note.trim())
+    .filter((note) => note.length > 0),
+});
+
 export default function ModuleForm() {
   const [form, setForm] = useState({
     module_title: "",
@@ -19,7 +55,8 @@ export default function ModuleForm() {
     const templateUrl = `${import.meta.env.BASE_URL}templates/moduleTemplate.html`;
     const res = await fetch(templateUrl);
     const template = await res.text();
-    setOutput(generateHTML(form, template));
+    const templateData = prepareTemplateData(form);
+    setOutput(generateHTML(templateData, template));
   }
 
   const updateSummaryNote = (index, value) => {
